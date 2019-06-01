@@ -57,15 +57,18 @@ public class RestInterface {
      * 测试用的main函数.
      */
     public static void main(String[] args) throws Exception {
-        Server server = new Server(8282); // 监听8282端口
+        Server server = new Server(8080); // 监听8282端口
         ServletHolder servlet = new ServletHolder(ServletContainer.class);
         // 设置初始化参数
         servlet.setInitParameter("com.sun.jersey.config.property.resourceConfigClass", "com.sun.jersey.api.core.PackagesResourceConfig");
-        servlet.setInitParameter("com.sun.jersey.config.property.packages", "com.tencent.awake.data.processing");
+        servlet.setInitParameter("com.sun.jersey.config.property.packages", "com.demo.jettytest");
         servlet.setInitParameter("com.sun.jersey.api.json.POJOMappingFeature", "true"); // 自动将对象映射成json返回
+
         ServletContextHandler handler = new ServletContextHandler(ServletContextHandler.SESSIONS);
         handler.setContextPath("/");
         handler.addServlet(servlet, "/*");
+
+
         server.setHandler(handler);
         server.start();
         System.out.println("start...in 8282");

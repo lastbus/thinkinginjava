@@ -1,9 +1,6 @@
 package com.demo.chapter18;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 /**
  * @author make
@@ -12,7 +9,8 @@ import java.io.IOException;
 public class BufferedInputFile {
 
     public static String read(String filename) throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(filename));
+        BufferedReader reader = null;
+        reader = new BufferedReader(new InputStreamReader(new FileInputStream(filename)));
         String s;
         StringBuilder sb = new StringBuilder();
         while ((s = reader.readLine()) != null) {
@@ -25,5 +23,7 @@ public class BufferedInputFile {
 
     public static void main(String[] args) throws IOException {
         System.out.println(read("pom.xml"));
+
     }
+
 }

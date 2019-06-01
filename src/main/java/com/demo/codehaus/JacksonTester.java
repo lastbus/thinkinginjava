@@ -8,8 +8,11 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.SerializationConfig;
 
 
+import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 /**
  * @author make
@@ -17,16 +20,43 @@ import java.util.Iterator;
  */
 public class JacksonTester {
     public static void main(String args[]){
-        ObjectMapper mapper = new ObjectMapper();
-        String jsonString = "{\"name\":\"Mahesh\", \"age\":21}";
-
-        //map json to student
+        JacksonTester tester = new JacksonTester();
         try {
-            Student student = mapper.readValue(jsonString, Student.class);
-            System.out.println(student);
-            mapper.enable(SerializationConfig.Feature.INDENT_OUTPUT);
-            jsonString = mapper.writeValueAsString(student);
+            ObjectMapper mapper = new ObjectMapper();
+            String jsonString = "{\"name\":\"Mahesh Kumar\", \"age\":21,\"verified\":false,\"marks\": [100,90,85]}";
             System.out.println(jsonString);
+            JsonNode rootNode = mapper.readTree(jsonString);
+
+            JsonNode nameNode = rootNode.path("name");
+            System.out.println("Name: "+ nameNode.getTextValue());
+
+            JsonNode ageNode = rootNode.path("age");
+            System.out.println("Age: " + ageNode.getIntValue());
+
+            JsonNode verifiedNode = rootNode.path("verified");
+            System.out.println("Verified: " + (verifiedNode.getBooleanValue() ? "Yes":"No"));
+
+            JsonNode marksNode = rootNode.path("marks");
+            Iterator<JsonNode> iterator = marksNode.getElements();
+            System.out.print("Marks: [ ");
+            while (iterator.hasNext()) {
+                JsonNode marks = iterator.next();
+                System.out.print(marks.getIntValue() + " ");
+            }
+            System.out.println("]");
+            System.out.println("---------------------------------");
+            Iterator<String> it = rootNode.getFieldNames();
+            while (it.hasNext()) {
+                System.out.println(it.next());
+            }
+            System.out.println("++++++++++++++++++++++++++++++++++");
+            Iterator<JsonNode> nodes = rootNode.getElements();
+            while (nodes.hasNext()) {
+                JsonNode j = nodes.next();
+                System.out.println(j.toString());
+                System.out.println("array : " + j.isArray());
+                System.out.println("contains node: " + j.isContainerNode());
+            }
 
         } catch (JsonParseException e) {
             e.printStackTrace();
@@ -37,6 +67,7 @@ public class JacksonTester {
         }
     }
 }
+
 
 class Student {
     private String name;

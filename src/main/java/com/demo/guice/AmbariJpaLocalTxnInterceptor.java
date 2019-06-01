@@ -16,32 +16,29 @@
  * limitations under the License.
  */
 
-package org.apache.ambari.server.orm;
+package com.demo.guice;
 
+import com.google.inject.Inject;
+import com.google.inject.persist.Transactional;
+import com.google.inject.persist.UnitOfWork;
+import com.google.inject.persist.jpa.AmbariJpaPersistService;
+import org.aopalliance.intercept.MethodInterceptor;
+import org.aopalliance.intercept.MethodInvocation;
+import org.eclipse.persistence.exceptions.EclipseLinkException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import com.demo.guice.TransactionalLock.LockType;
+import com.demo.guice.TransactionalLock.LockArea;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.PersistenceException;
 import java.lang.reflect.Method;
 import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
-import javax.persistence.PersistenceException;
-
-import org.aopalliance.intercept.MethodInterceptor;
-import org.aopalliance.intercept.MethodInvocation;
-import org.apache.ambari.annotations.TransactionalLock;
-import org.apache.ambari.annotations.TransactionalLock.LockArea;
-import org.apache.ambari.annotations.TransactionalLock.LockType;
-import org.eclipse.persistence.exceptions.EclipseLinkException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.google.inject.Inject;
-import com.google.inject.persist.Transactional;
-import com.google.inject.persist.UnitOfWork;
-import com.google.inject.persist.jpa.AmbariJpaPersistService;
 
 /**
  * The {@link AmbariJpaLocalTxnInterceptor} is used to intercept method calls
@@ -177,7 +174,7 @@ public class AmbariJpaLocalTxnInterceptor implements MethodInterceptor {
 
       if (cause != null && cause instanceof EclipseLinkException) {
         EclipseLinkException de = (EclipseLinkException) cause;
-        LOG.error("[DETAILED ERROR] Rollback reason: ", cause);
+//        LOG.error("[DETAILED ERROR] Rollback reason: ", cause);
         Throwable internal = de.getInternalException();
 
         int exIndent = 1;
@@ -185,9 +182,9 @@ public class AmbariJpaLocalTxnInterceptor implements MethodInterceptor {
           SQLException exception = (SQLException) internal;
 
           while (exception != null) {
-            LOG.error("[DETAILED ERROR] Internal exception ("
-                + exIndent
-                + ") : ", exception); // Log the exception
+//            LOG.error("[DETAILED ERROR] Internal exception ("
+//                + exIndent
+//                + ") : ", exception); // Log the exception
             exception = exception.getNextException();
             exIndent++;
           }

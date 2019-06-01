@@ -15,20 +15,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.ambari.annotations;
+package com.demo.guice;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-import java.util.concurrent.locks.ReadWriteLock;
-
-import org.apache.ambari.server.configuration.Configuration;
+import com.google.inject.persist.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.inject.persist.Transactional;
+import java.lang.annotation.*;
+import java.util.concurrent.locks.ReadWriteLock;
 
 /**
  * The {@link TransactionalLock} annotation is used to provide advice around a

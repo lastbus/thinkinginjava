@@ -16,15 +16,10 @@
  * limitations under the License.
  */
 
-package org.apache.ambari.server.orm;
+package com.demo.guice;
 
 
-
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
 /**
  * Any method or class marked with annotation treated as requiring Jpa session.

@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package org.apache.ambari.server;
+package com.demo.guice;
 
 import java.io.IOException;
 

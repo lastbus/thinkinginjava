@@ -17,25 +17,9 @@
  */
 package com.google.inject.persist.jpa;
 
-import static com.google.inject.matcher.Matchers.annotatedWith;
-import static com.google.inject.matcher.Matchers.any;
-
-import java.lang.reflect.AccessibleObject;
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
-import java.util.List;
-import java.util.Map;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-
-import org.aopalliance.intercept.MethodInterceptor;
-import org.aopalliance.intercept.MethodInvocation;
-import org.apache.ambari.server.orm.AmbariJpaLocalTxnInterceptor;
-import org.apache.ambari.server.orm.AmbariLocalSessionInterceptor;
-import org.apache.ambari.server.orm.RequiresSession;
-
+import com.demo.guice.AmbariJpaLocalTxnInterceptor;
+import com.demo.guice.AmbariLocalSessionInterceptor;
+import com.demo.guice.RequiresSession;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provides;
@@ -46,6 +30,20 @@ import com.google.inject.persist.PersistService;
 import com.google.inject.persist.UnitOfWork;
 import com.google.inject.persist.finder.DynamicFinder;
 import com.google.inject.persist.finder.Finder;
+import org.aopalliance.intercept.MethodInterceptor;
+import org.aopalliance.intercept.MethodInvocation;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import java.lang.reflect.AccessibleObject;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
+import java.util.List;
+import java.util.Map;
+
+import static com.google.inject.matcher.Matchers.annotatedWith;
+import static com.google.inject.matcher.Matchers.any;
 
 /**
  * Copy of guice persist module for local modifications
@@ -82,6 +80,7 @@ public class AmbariJpaPersistModule extends PersistModule {
 
     // Bind dynamic finders.
     for (Class<?> finder : dynamicFinders) {
+      System.out.println("bindFinder:  " + finder);
       bindFinder(finder);
     }
 

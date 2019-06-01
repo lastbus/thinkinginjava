@@ -17,9 +17,9 @@
  */
 package com.google.inject.persist.jpa;
 
-import java.util.Map;
-
 import com.google.inject.Inject;
+
+import java.util.Map;
 
 /**
  * Override non-public class limitations as we need non-interface method

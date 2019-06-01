@@ -7,24 +7,41 @@ import java.util.Date;
  * @creare 25/09/2018
  */
 public class TaskInfoPo {
-    private Date date;
-    private String path;
 
+    private int id;
+    private int taskId;
+    private Date createTime;
+    private int appId;
 
-
-    public Date getDate() {
-        return date;
+    public int getId() {
+        return id;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getPath() {
-        return path;
+    public int getTaskId() {
+        return taskId;
     }
 
-    public void setPath(String path) {
-        this.path = path;
+    public void setTaskId(int taskId) {
+        this.taskId = taskId;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public int getAppId() {
+        return appId;
+    }
+
+    public void setAppId(int appId) {
+        this.appId = appId;
     }
 }

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="info">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n">
+            </PatternLayout>
+        </Console>
+        <RollingFile name="RollingFileInfo" fileName="/Users/make/github/thinkinginjava/info.log"
+
+                     filePattern="/Users/make/github/thinkinginjava/info.log.%i">
+
+        <!--<ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>-->
+
+        <PatternLayout pattern="[%d{HH:mm:ss:SSS}] [%p] - %l - %m%n"/>
+
+        <Policies>
+            <!--<TimeBasedTriggeringPolicy/>-->
+            <SizeBasedTriggeringPolicy size="1 MB"/>
+        </Policies>
+        <!-- DefaultRolloverStrategy属性如不设置，则默认为最多同一文件夹下7个文件，这里设置了20 -->
+        <DefaultRolloverStrategy max="2"/>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Root level="debug">
+            <!--<AppenderRef ref="Console" />-->
+            <AppenderRef ref="RollingFileInfo" />
+        </Root>
+    </Loggers>
+</Configuration>
