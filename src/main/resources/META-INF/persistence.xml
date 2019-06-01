@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+    http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+             version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
+    <!--persistence-unit:定义了这个unit的名字以及详细的数据库连接驱动，数据库用户名，密码。  -->
+    <!--这个employeeService跟main方法里的createEntityManagerFactory值一致  -->
+    <!-- 如果我们需要访问多个库的话，在配置文件里也可以定义多个persistence-unit。有了这个factory之后我们再创建一个EntityManager对象 -->
+    <persistence-unit name="default" transaction-type="RESOURCE_LOCAL">
+        <!-- <class>里面定义的是需要映射到数据库的具体实体类 -->
+        <!-- PersonInformation对应model的.java文件-->
+        <class>com.demo.eclipselink.PersonInformation</class>
+        <properties>
+            <!--因为我们要连的数据库是mysql，这里的javax.persistence.jdbc.driver值被设为com.mysql.jdbc.Driver。  -->
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+            <!--具体要连接的数据库名字在javax.persistence.jdbc.url对应的值里面定义了，为shop  -->
+            <property name="javax.persistence.jdbc.url"
+                      value="jdbc:mysql://localhost:3306/test" />
+
+            <property name="javax.persistence.jdbc.user" value="root" />
+            <property name="javax.persistence.jdbc.password" value="root" />
+
+            <!-- EclipseLink should create the database schema automatically -->
+            <property name="eclipselink.ddl-generation" value="create-tables" />
+            <property name="eclipselink.ddl-generation.output-mode"
+                      value="database" />
+        </properties>
+    </persistence-unit>
+
+</persistence>
+
